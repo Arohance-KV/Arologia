@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
-import MedalImg from '../../assets/Medal-Investments.png';
-import caroalImg from '../../assets/caroal.png';
+import MedalImg from '/assets/Medal-Investments.png';
+import caroalImg from '/assets/caroal.png';
 
 // Works data with titles, descriptions, and multiple website previews
 const worksData = [
@@ -344,33 +344,33 @@ export const WorkCard = ({ work }) => {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 w-full max-w-7xl mx-auto items-center">
         {/* Left side - Content (2 columns) */}
         <div className="lg:col-span-2 space-y-6 text-white">
-          <div>
+          <>
             <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-tight">
               {work.title}
             </h2>
             <p className="text-lg lg:text-xl xl:text-2xl text-gray-200 leading-relaxed mb-6">
               {work.description}
             </p>
-          </div>
-          {/* Visit Website Button */}
-          <div className="pt-4">
-            <a
-              href={work.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-white text-black font-semibold rounded-sm hover:bg-gray-100 transition-colors duration-300 group"
-            >
-              Visit Website
-              <svg 
-                className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
+            {/* Visit Website Button */}
+            <div className="pt-4">
+              <a
+                href={work.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 bg-white text-black font-semibold rounded-sm hover:bg-gray-100 transition-colors duration-300 group"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
+                Visit Website
+                <svg 
+                  className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </>
         </div>
         
         {/* Right side - Seamless Infinite Smooth Scrolling Website Previews (3 columns) */}

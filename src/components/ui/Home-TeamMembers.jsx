@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import Rohan from "../../assets/Rohan-profile.jpg";
-import Kunal from "../../assets/kunal-profile.jpg";
-import Nazi from "../../assets/Nazi-profile.jpg";
+import Rohan from "/assets/Rohan-profile.jpg";
+import Kunal from "/assets/kunal-profile.jpg";
+import Nazi from "/assets/nazi-profile.jpg";
 
 
 const TeamMembersSection = () => {
@@ -128,7 +128,7 @@ const TeamMembersSection = () => {
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
             Meet the creative minds behind Arohance Tech Team, bringing innovation and expertise to every project.
-          </p>
+          </p>        
         </div>
 
         {/* Team Members Grid - 3 per row */}

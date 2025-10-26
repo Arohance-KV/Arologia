@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Star, CheckCircle, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import bengaluru from '../assets/bengaluru.png';
+import bengaluru from '/assets/bengaluru.png';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
