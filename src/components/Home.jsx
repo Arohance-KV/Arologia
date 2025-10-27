@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WorksSection } from './ui/Home-Works';
 import TeamMembersSection from './ui/Home-TeamMembers';
-import sampleVideo from '/assets/sample.mp4';
+import sampleVideo from '/sample.mp4';
 import { Link } from 'react-router-dom';
 import HomeFAQs from './ui/Home-FAQs';
 import Testimonials from './ui/Home-Testimonials';
