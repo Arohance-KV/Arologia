@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
-import MedalImg from '/assets/Medal-Investments.png';
-import caroalImg from '/assets/caroal.png';
+import MedalImg from '/Medal-Investments.png';
+import caroalImg from '/caroal.png';
 
 // Works data with titles, descriptions, and multiple website previews
 const worksData = [
