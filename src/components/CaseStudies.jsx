@@ -5,6 +5,7 @@ import Silk from './ui/CaseStudies-HeroBackground';
 import CaseStudiesDetailed from './ui/CaseStudies-Detailed';
 import { caseStudies } from './ui/CaseStudies-Data';
 
+
 const CaseStudies = () => {
   const [selectedStudy, setSelectedStudy] = useState(null);
   const [hoveredCard, setHoveredCard] = useState(null);
