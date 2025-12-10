@@ -243,10 +243,10 @@ function Home() {
               ref={heroTheRef}
               className="text-[12vw] font-bold leading-[0.9] tracking-tight text-white opacity-0"
             >
-              THE
+              AROLOGIA
             </div>
             
-            {/* "AROHANCE" - Middle with increased font weight and max width constraint */}
+            {/* "AROHANCE" - Middle with increased font weight and max width constraint 
             <div 
               ref={heroArohanceRef}
               className="text-[12vw] font-extrabold leading-[0.9] tracking-tight text-white opacity-0 max-w-[50vw]"
