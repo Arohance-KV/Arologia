@@ -1,7 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import MedalImg from '/Medal-Investments.png';
-import caroalImg from '/caroal.png';
+import Miabout from '/MI_about.png';
+import Micontact from '/MI_contact.png';
+import Miservices from '/MI_services.png';
+import swi from '/SweetyIntimates.png';
+import Sicart from '/SI_cart.png';
+import Siproduct from '/SI_products.png';
+import Sihome from '/SI_wishlist.png';
+
 
 // Works data with titles, descriptions, and multiple website previews
 const worksData = [
@@ -11,24 +18,24 @@ const worksData = [
     description: "A comprehensive investment platform designed to help users make informed financial decisions with advanced analytics and portfolio management tools.",
     websitePreviews: [
       MedalImg,
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2126&q=80",
-      "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      Miabout,
+      Micontact,
+      Miservices
     ],
-    websiteUrl: "https://medalinvestments.com",
+    websiteUrl: "https://medalinvestments.in",
     bgGradient: "from-gray-900 via-gray-800 to-black"
   },
   {
     id: 2,
-    title: "CAROAL",
+    title: "SWEETY INTIMATES",
     description: "An innovative automotive marketplace connecting buyers and sellers with AI-powered recommendations and seamless transaction experiences.",
     websitePreviews: [
-      caroalImg,
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      swi,
+      Sihome,
+      Siproduct,
+      Sicart
     ],
-    websiteUrl: "https://caroal.com",
+    websiteUrl: "https://sweetyintimates.com",
     bgGradient: "from-amber-600 via-orange-500 to-yellow-400"
   },
   {
