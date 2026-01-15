@@ -158,5 +158,5 @@ export default function useHeroGsap({
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  },);
 }
