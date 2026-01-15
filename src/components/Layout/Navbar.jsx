@@ -361,7 +361,7 @@ const Navbar = () => {
             {/* Navigation Links - Center (Desktop Only) */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-sm font-medium text-white/90">
               <Link to="/about" className="hover:text-white transition-colors duration-200">About</Link>
-              <Link to="/case-studies" className="hover:text-white transition-colors duration-200">Case Studies</Link>
+              <Link to="/casestudies" className="hover:text-white transition-colors duration-200">Case Studies</Link>
               <Link to="/ContactUs" className="hover:text-white transition-colors duration-200">Contact Us</Link>
             </div>
 

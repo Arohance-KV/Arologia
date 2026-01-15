@@ -21,19 +21,20 @@ export const BUDGET_RANGES = [
 ];
 
 export const COMPANY_INFO = {
-  name: 'AROHANCE TECH Solutions Pvt Ltd',
+  name: 'AROHANCE TECH & MARKETING SOLUTIONS',
   address: {
-    line1: 'Block A, 4th Floor,',
-    line2: 'Tech Park Complex,',
-    line3: 'Whitefield Road,',
-    line4: 'Bangalore - 560066, Karnataka, India'
+    line1: '9th Block, 1558,',
+    line2: ' JTH Arcade, Basement',
+    line3: 'E End Main Road, Jayanagar',
+    line4: 'Bangalore - 560041, Karnataka'
   },
   hours: {
-    weekday: 'Monday - Friday: 9:00 AM - 6:00 PM',
+    weekday: 'Monday - Friday: 11:00 AM - 6:00 PM',
     weekend: 'Saturday: 10:00 AM - 4:00 PM'
   },
-  phone: '+91 80 4577 4508',
-  email: 'info@techcorpsolutions.com'
+  phone1: '+91 9427673035',
+  phone2: '+91 9727361979',
+  email: 'info@arohance.com'
 };
 
 export const EMAILJS_CONFIG = {

@@ -4,7 +4,7 @@ import CaseStudyGrid from "../components/CaseStudy/CaseStudyGrid";
 import CaseStudyDetails from "../components/CaseStudy/CaseStudyDetails";
 import CaseStudyCTA from "../components/CaseStudy/CaseStudyCTA";
 
-const CaseStudies = () => {
+const CaseStudyPage = () => {
   const [selectedStudy, setSelectedStudy] = useState(null);
   const heroRef = useRef(null);
 
@@ -40,4 +40,4 @@ const CaseStudies = () => {
   );
 };
 
-export default CaseStudies;
+export default CaseStudyPage;
