@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
-import Lamp from './lamp'; // Import the Lamp component
+import Lamp from '../Animations/lamp'; // Import the Lamp component
 
 gsap.registerPlugin(ScrollTrigger);
 

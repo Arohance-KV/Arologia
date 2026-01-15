@@ -1,15 +1,18 @@
-//app.jsx 
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './App.css';
-import Home from './components/Home';
-import About from './components/About';
-import CaseStudies from './components/CaseStudies';
-import ContactUs from './components/ContactUs';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+// App.jsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Layout
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
+
+// Pages
+import HomePage from "./Pages/HomePage";
+import AboutPage from "./Pages/AboutPage";
+import CaseStudyPage from "./Pages/CaseStudyPage";
+import ContactUsPage from "./Pages/ContactUsPage";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -17,19 +20,18 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   return (
     <>
-      {/* Navbar Component */}
+      {/* Navbar */}
       <Navbar />
 
       {/* Routes */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/design-house" element={<About />} />
-        <Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/case-studies" element={<CaseStudyPage />} />
+        <Route path="/contactus" element={<ContactUsPage />} />
       </Routes>
 
-      {/* Footer Component */}
+      {/* Footer */}
       <Footer />
     </>
   );
