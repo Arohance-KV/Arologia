@@ -1,10 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef } from "react";
 import { Quote } from "lucide-react";
 import { testimonialsData } from "../../utils/testimonialData";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useTestimonialsAnimation } from "../../hooks/useTestimonialsAnimation";
+import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 
 const TestimonialsSection = () => {
   const sectionRef = useRef(null);
@@ -13,215 +11,9 @@ const TestimonialsSection = () => {
   const trackRef = useRef(null);
   const typingRef = useRef(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const container = containerRef.current;
-    const track = trackRef.current;
-    const title = titleRef.current;
-    const typingContainer = typingRef.current;
-
-    if (!section || !container || !track || !title || !typingContainer) return;
-
-    // Create individual character spans for simple animation
-    const text = "TESTIMONIALS";
-    typingContainer.innerHTML = text
-      .split("")
-      .map(
-        (char) =>
-          `<span class="char" style="opacity: 0; display: inline-block;">${
-            char === " " ? "&nbsp;" : char
-          }</span>`
-      )
-      .join("");
-
-    const chars = typingContainer.querySelectorAll(".char");
-
-    // Set initial states for title container
-    gsap.set(title, {
-      opacity: 0,
-    });
-
-    // Set initial states for characters
-    gsap.set(chars, {
-      opacity: 0,
-      x: -20,
-    });
-
-    // Title container animation - appears first
-    const titleAnimation = ScrollTrigger.create({
-      trigger: section,
-      start: "top 80%",
-      end: "top 20%",
-      onEnter: () => {
-        gsap.to(title, {
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        });
-
-        // Simple staggered character animation - slide in from left
-        gsap.to(chars, {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          stagger: 0.1,
-        });
-      },
-      onLeave: () => {
-        // Fade out title when horizontal scroll starts
-        gsap.to(title, {
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        });
-      },
-      onEnterBack: () => {
-        gsap.to(title, {
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        });
-        gsap.to(chars, {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          stagger: 0.08,
-        });
-      },
-      onLeaveBack: () => {
-        gsap.to(title, {
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        });
-        gsap.set(chars, {
-          opacity: 0,
-          x: -20,
-        });
-      },
-    });
-
-    // Calculate the width needed to center the last card
-    const lastCard = track.lastElementChild;
-    const lastCardWidth = lastCard ? lastCard.offsetWidth : 0;
-    const containerCenterOffset = container.offsetWidth / 2;
-    const lastCardCenterOffset = lastCardWidth / 2;
-
-    // Total distance to move: from start to positioning last card at center
-    const totalWidth =
-      track.scrollWidth - containerCenterOffset - lastCardCenterOffset;
-
-    // Ensure the track stays within bounds
-    gsap.set(track, {
-      x: 0,
-      willChange: "transform", // Optimize for animations
-    });
-
-    const horizontalScroll = gsap.to(track, {
-      x: () => -Math.max(0, totalWidth), // Move to center the last card
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: () => `+=${Math.max(100, totalWidth)}`, // Minimum scroll distance
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: () => {
-          // Clamp the transform to prevent overflow
-          const maxTransform = -Math.max(0, totalWidth);
-          const currentX = gsap.getProperty(track, "x");
-          if (currentX < maxTransform) {
-            gsap.set(track, { x: maxTransform });
-          }
-        },
-        onRefresh: () => {
-          // Recalculate on resize to maintain last card centering
-          const newLastCard = track.lastElementChild;
-          const newLastCardWidth = newLastCard ? newLastCard.offsetWidth : 0;
-          const newContainerCenterOffset = container.offsetWidth / 2;
-          const newLastCardCenterOffset = newLastCardWidth / 2;
-          const newTotalWidth =
-            track.scrollWidth -
-            newContainerCenterOffset -
-            newLastCardCenterOffset;
-
-          if (Math.abs(newTotalWidth - totalWidth) > 10) {
-            ScrollTrigger.refresh();
-          }
-        },
-      },
-    });
-
-    // Animate cards as they come into view
-    const cards = track.querySelectorAll(".testimonial-card");
-    cards.forEach((card) => {
-      gsap.set(card, {
-        opacity: 0,
-        y: 50,
-        scale: 0.9,
-      });
-
-      ScrollTrigger.create({
-        trigger: card,
-        containerAnimation: horizontalScroll,
-        start: "left 70%",
-        end: "right 30%",
-        onEnter: () => {
-          gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: "power3.out",
-          });
-        },
-        onLeave: () => {
-          gsap.to(card, {
-            opacity: 0.7,
-            scale: 0.95,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            ease: "power3.out",
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(card, {
-            opacity: 0,
-            y: 50,
-            scale: 0.9,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        },
-      });
-    });
-
-    // Cleanup
-    return () => {
-      titleAnimation.kill();
-      horizontalScroll.kill();
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (
-          trigger.trigger === section ||
-          trigger.containerAnimation === horizontalScroll
-        ) {
-          trigger.kill();
-        }
-      });
-    };
-  }, []);
+  // Initialize animations
+  useTestimonialsAnimation(sectionRef, containerRef, titleRef, trackRef, typingRef);
+  useHorizontalScroll(sectionRef, containerRef, trackRef);
 
   return (
     <section
@@ -229,9 +21,9 @@ const TestimonialsSection = () => {
       className="relative bg-black text-white"
       style={{
         height: "100vh",
-        overflow: "hidden", // Prevent any overflow
+        overflow: "hidden",
         position: "relative",
-        width: "100vw", // Ensure full width
+        width: "100vw",
       }}
     >
       {/* Title with Animation */}
@@ -240,9 +32,7 @@ const TestimonialsSection = () => {
           ref={titleRef}
           className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white opacity-0 whitespace-nowrap"
         >
-          <div ref={typingRef} className="inline-block relative">
-            {/* Content will be populated by JavaScript */}
-          </div>
+          <div ref={typingRef} className="inline-block relative" />
         </div>
       </div>
 
@@ -252,7 +42,7 @@ const TestimonialsSection = () => {
         className="flex items-center h-full"
         style={{
           width: "100%",
-          overflow: "hidden", // Critical: prevent horizontal scrollbar
+          overflow: "hidden",
           position: "relative",
         }}
       >
@@ -261,8 +51,8 @@ const TestimonialsSection = () => {
           className="flex items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32"
           style={{
             width: "max-content",
-            willChange: "transform", // Optimize for animations
-            transform: "translateX(0px)", // Initial position
+            willChange: "transform",
+            transform: "translateX(0px)",
           }}
         >
           {testimonialsData.map((testimonial) => (
@@ -327,22 +117,19 @@ const TestimonialsSection = () => {
 
       {/* CSS for hiding scrollbars */}
       <style>{`
-              /* Hide scrollbars */
-              ::-webkit-scrollbar {
-                display: none;
-              }
-
-              html {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-              }
-
-              body {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-              }
-            `}</style>
-  </section>
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        html {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        body {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </section>
   );
 };
 

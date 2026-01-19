@@ -142,13 +142,13 @@ const Footer = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-4">
               <div className="text-white font-medium">
-                <div className="font-bold leading-tight text-base sm:text-lg">AROHANCE</div>
+                <div className="font-bold leading-tight text-base sm:text-lg">Arologia</div>
                 <div className="font-light leading-tight text-xs sm:text-sm">Tech Team</div>
               </div>
             </div>
             
             <div className="text-xs sm:text-sm text-gray-400">
-              © 2024 AROHANCE Tech Services. All rights reserved.
+              ©2023 Arohance Tech & Marketing Solutions. All rights reserved.
             </div>
           </div>
         </div>

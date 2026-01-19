@@ -11,14 +11,14 @@ import AboutUs from "../components/Home/AboutUs";
 export default function HomePage() {
   return (
     <div className="bg-black text-white">
-      {/* <HeroSection /> */}
-      {/* <OurServices /> */}
-      {/* <Works /> */}
-      {/* <AboutUs /> */}
-      {/* <TeamMembers /> */}
+      <HeroSection />
+      <OurServices />
+      <Works />
+      <AboutUs />
+      <TeamMembers />
       <OurClients />
       <Testimonials />
-      {/* <FAQs /> */}
+      <FAQs />
     </div>
   );
 }
