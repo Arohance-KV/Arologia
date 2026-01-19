@@ -100,7 +100,7 @@ const OurWorks = () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
     // empty deps: single loop; refs hold dynamic values
-  }, []);
+  },);
 
   // handlers (pause while hovering; toggle pause on click)
   const handleMouseEnter = () => {
@@ -130,7 +130,7 @@ const OurWorks = () => {
 
         {/* Scrolling Cards wrapper */}
         <div
-          className="relative h-[500px] sm:h-[550px] md:h-[600px]"
+          className="relative h-[350px] sm:h-[550px] md:h-[600px]"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={handleClick}

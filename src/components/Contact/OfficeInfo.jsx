@@ -15,7 +15,7 @@ const OfficeInfo = ({ officeRef }) => (
             <div className="aspect-[3/4] bg-white relative">
               <img
                 src="/assets/bengaluru.png"
-                className="w-full h-full object-cover"
+                className="w-full md:h-full sm:min-h-screen object-cover"
               />
             </div>
           </div>

@@ -14,7 +14,7 @@ const CaseStudiesDetailed = ({ selectedStudy, onClose }) => {
     };
 
     // Handle browser back button
-    const handlePopState = (e) => {
+    const handlePopState = () => {
       onClose();
     };
 

@@ -70,7 +70,7 @@ const MenuOverlay = ({ isOpen, onClose }) => {
           </Link>
           <Link
             ref={(el) => (plusMenuItemsRef.current[2] = el)}
-            to="/case-studies"
+            to="/casestudies"
             onClick={handleMenuItemClick}
             className="hover:text-white/70 transition-colors duration-300 transform hover:scale-105 active:scale-95 text-center w-full py-2 md:py-3"
           >
