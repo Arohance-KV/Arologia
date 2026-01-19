@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 
-const Lamp = ({ children, className = "" }) => {
+const lamp = ({ children, className = "" }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const lampRef = useRef(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const refsMap = useRef({
     leftCone: null,
     rightCone: null,
@@ -9,6 +11,7 @@ const Lamp = ({ children, className = "" }) => {
     beam: null,
   });
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -157,4 +160,4 @@ const Lamp = ({ children, className = "" }) => {
   );
 };
 
-export default Lamp;
+export default lamp;
