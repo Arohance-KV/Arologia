@@ -10,27 +10,44 @@ export default function useHeroGsap({
   heroDescriptionRef,
 }) {
   useEffect(() => {
-    // ✅ Initial states
-    if (heroTheRef.current) {
-      gsap.set(heroTheRef.current, { y: 100, opacity: 0, scale: 0.9 });
-    }
+    // ✅ GSAP context = clean + scoped animations
+    const ctx = gsap.context(() => {
+      // ✅ Helper to avoid repeating same ScrollTrigger code
+      const createScrollTrigger = ({
+        element,
+        onEnter,
+        onLeave,
+        onEnterBack,
+        onLeaveBack,
+      }) => {
+        if (!element) return;
 
-    if (heroTechTeamRef.current) {
-      gsap.set(heroTechTeamRef.current, { y: 100, opacity: 0, scale: 0.9 });
-    }
+        ScrollTrigger.create({
+          trigger: element,
+          start: "top 85%",
+          end: "bottom 15%",
+          onEnter,
+          onLeave,
+          onEnterBack,
+          onLeaveBack,
+        });
+      };
 
-    if (heroDescriptionRef.current) {
-      gsap.set(heroDescriptionRef.current, { y: 50, opacity: 0 });
-    }
+      const heroTheEl = heroTheRef?.current;
+      const heroTechTeamEl = heroTechTeamRef?.current;
+      const heroDescEl = heroDescriptionRef?.current;
 
-    // ✅ AROLOGIA
-    if (heroTheRef.current) {
-      ScrollTrigger.create({
-        trigger: heroTheRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
+      // ✅ Initial states (same as your code)
+      if (heroTheEl) gsap.set(heroTheEl, { y: 100, opacity: 0, scale: 0.9 });
+      if (heroTechTeamEl)
+        gsap.set(heroTechTeamEl, { y: 100, opacity: 0, scale: 0.9 });
+      if (heroDescEl) gsap.set(heroDescEl, { y: 50, opacity: 0 });
+
+      // ✅ AROLOGIA
+      createScrollTrigger({
+        element: heroTheEl,
         onEnter: () => {
-          gsap.to(heroTheRef.current, {
+          gsap.to(heroTheEl, {
             y: 0,
             opacity: 1,
             scale: 1,
@@ -39,7 +56,7 @@ export default function useHeroGsap({
           });
         },
         onLeave: () => {
-          gsap.to(heroTheRef.current, {
+          gsap.to(heroTheEl, {
             y: -50,
             opacity: 0.3,
             scale: 0.95,
@@ -48,7 +65,7 @@ export default function useHeroGsap({
           });
         },
         onEnterBack: () => {
-          gsap.to(heroTheRef.current, {
+          gsap.to(heroTheEl, {
             y: 0,
             opacity: 1,
             scale: 1,
@@ -57,7 +74,7 @@ export default function useHeroGsap({
           });
         },
         onLeaveBack: () => {
-          gsap.to(heroTheRef.current, {
+          gsap.to(heroTheEl, {
             y: 100,
             opacity: 0,
             scale: 0.9,
@@ -66,16 +83,12 @@ export default function useHeroGsap({
           });
         },
       });
-    }
 
-    // ✅ Tech Team
-    if (heroTechTeamRef.current) {
-      ScrollTrigger.create({
-        trigger: heroTechTeamRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
+      // ✅ Tech Team
+      createScrollTrigger({
+        element: heroTechTeamEl,
         onEnter: () => {
-          gsap.to(heroTechTeamRef.current, {
+          gsap.to(heroTechTeamEl, {
             y: 0,
             opacity: 1,
             scale: 1,
@@ -84,7 +97,7 @@ export default function useHeroGsap({
           });
         },
         onLeave: () => {
-          gsap.to(heroTechTeamRef.current, {
+          gsap.to(heroTechTeamEl, {
             y: -50,
             opacity: 0.3,
             scale: 0.95,
@@ -93,7 +106,7 @@ export default function useHeroGsap({
           });
         },
         onEnterBack: () => {
-          gsap.to(heroTechTeamRef.current, {
+          gsap.to(heroTechTeamEl, {
             y: 0,
             opacity: 1,
             scale: 1,
@@ -102,7 +115,7 @@ export default function useHeroGsap({
           });
         },
         onLeaveBack: () => {
-          gsap.to(heroTechTeamRef.current, {
+          gsap.to(heroTechTeamEl, {
             y: 100,
             opacity: 0,
             scale: 0.9,
@@ -111,16 +124,12 @@ export default function useHeroGsap({
           });
         },
       });
-    }
 
-    // ✅ Description
-    if (heroDescriptionRef.current) {
-      ScrollTrigger.create({
-        trigger: heroDescriptionRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
+      // ✅ Description
+      createScrollTrigger({
+        element: heroDescEl,
         onEnter: () => {
-          gsap.to(heroDescriptionRef.current, {
+          gsap.to(heroDescEl, {
             y: 0,
             opacity: 1,
             duration: 1.2,
@@ -128,7 +137,7 @@ export default function useHeroGsap({
           });
         },
         onLeave: () => {
-          gsap.to(heroDescriptionRef.current, {
+          gsap.to(heroDescEl, {
             y: -30,
             opacity: 0,
             duration: 0.6,
@@ -136,7 +145,7 @@ export default function useHeroGsap({
           });
         },
         onEnterBack: () => {
-          gsap.to(heroDescriptionRef.current, {
+          gsap.to(heroDescEl, {
             y: 0,
             opacity: 1,
             duration: 0.8,
@@ -144,7 +153,7 @@ export default function useHeroGsap({
           });
         },
         onLeaveBack: () => {
-          gsap.to(heroDescriptionRef.current, {
+          gsap.to(heroDescEl, {
             y: 50,
             opacity: 0,
             duration: 0.6,
@@ -152,11 +161,9 @@ export default function useHeroGsap({
           });
         },
       });
-    }
+    });
 
-    // ✅ Cleanup
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  },);
+    // ✅ Cleanup (kills only what this hook created)
+    return () => ctx.revert();
+  }, [heroTheRef, heroTechTeamRef, heroDescriptionRef]);
 }

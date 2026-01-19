@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Quote } from "lucide-react";
 import { testimonialsData } from "../../utils/testimonialData";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -144,7 +145,9 @@ const TestimonialsSection = () => {
           const newContainerCenterOffset = container.offsetWidth / 2;
           const newLastCardCenterOffset = newLastCardWidth / 2;
           const newTotalWidth =
-            track.scrollWidth - newContainerCenterOffset - newLastCardCenterOffset;
+            track.scrollWidth -
+            newContainerCenterOffset -
+            newLastCardCenterOffset;
 
           if (Math.abs(newTotalWidth - totalWidth) > 10) {
             ScrollTrigger.refresh();
@@ -255,7 +258,7 @@ const TestimonialsSection = () => {
       >
         <div
           ref={trackRef}
-          className="flex items-center gap-8 md:gap-12 lg:gap-16 px-12 md:px-24 lg:px-32"
+          className="flex items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32"
           style={{
             width: "max-content",
             willChange: "transform", // Optimize for animations
@@ -265,7 +268,7 @@ const TestimonialsSection = () => {
           {testimonialsData.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="testimonial-card flex-shrink-0 w-80 md:w-96 lg:w-[28rem] h-96 md:h-[28rem] bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-sm p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:scale-105 transition-all duration-500 cursor-pointer"
+              className="testimonial-card flex-shrink-0 w-72 sm:w-80 md:w-96 lg:w-[28rem] h-80 sm:h-96 md:h-[28rem] bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-sm p-6 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:scale-105 transition-all duration-500 cursor-pointer"
               style={{ opacity: 0 }}
             >
               {/* Background glow effect */}
@@ -273,39 +276,43 @@ const TestimonialsSection = () => {
 
               {/* Card content */}
               <div className="relative z-30">
+                {/* Client info */}
+                <div className="relative z-30 flex items-center space-x-4 mb-6">
+                  <div className="relative">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/20 group-hover:border-white/40 transition-all duration-300"
+                      loading="lazy"
+                    />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg md:text-xl font-semibold text-white group-hover:text-white transition-colors duration-300">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-sm md:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                      {testimonial.role}
+                    </p>
+                    <p className="text-sm md:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                      {testimonial.company}
+                    </p>
+                  </div>
+                </div>
+
                 {/* Quote icon */}
-                <div className="text-4xl md:text-5xl text-white/20 mb-6 group-hover:text-white/30 transition-colors duration-300">
-                  "
+                <div className="mb-4 md:mb-6 lg:mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Quote
+                    size={24}
+                    className="md:w-8 md:h-8 lg:w-8 lg:h-8 text-white/30 group-hover:text-white/50 transition-colors duration-300"
+                    strokeWidth={1.5}
+                  />
                 </div>
 
                 {/* Testimonial text */}
-                <p className="text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed mb-8 group-hover:text-white transition-colors duration-300">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed group-hover:text-white transition-colors duration-300">
                   {testimonial.testimonial}
                 </p>
-              </div>
-
-              {/* Client info */}
-              <div className="relative z-30 flex items-center space-x-4">
-                <div className="relative">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/20 group-hover:border-white/40 transition-all duration-300"
-                    loading="lazy"
-                  />
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-                <div>
-                  <h4 className="text-lg md:text-xl font-semibold text-white group-hover:text-white transition-colors duration-300">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-sm md:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                    {testimonial.role}
-                  </p>
-                  <p className="text-sm md:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                    {testimonial.company}
-                  </p>
-                </div>
               </div>
 
               {/* Subtle border effect */}
@@ -319,23 +326,23 @@ const TestimonialsSection = () => {
       </div>
 
       {/* CSS for hiding scrollbars */}
-      <style jsx>{`
-        /* Hide scrollbars */
-        ::-webkit-scrollbar {
-          display: none;
-        }
+      <style>{`
+              /* Hide scrollbars */
+              ::-webkit-scrollbar {
+                display: none;
+              }
 
-        html {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+              html {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+              }
 
-        body {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-    </section>
+              body {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+              }
+            `}</style>
+  </section>
   );
 };
 

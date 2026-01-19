@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
-import Lamp from '../Animations/lamp'; // Import the Lamp component
+import Lamp from '../Animations/Lamp'; // Import the Lamp component
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,13 +90,13 @@ function HomeAboutUs() {
       <Lamp className="p-0">
         <div
           ref={aboutContentRef}
-          className="relative z-50 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-50 md:pt-0"
+          className="relative z-50 max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pt-50 md:pt-0"
         >
           <div className="text-center">
             {/* Title */}
             <h2
               ref={aboutTitleRef}
-              className="text-5xl md:text-6xl lg:text-7xl font-light mt-2 tracking-wide opacity-0 relative bg-transparent text-black pt-34"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light mt-2 tracking-wide opacity-0 relative bg-transparent text-black pt-10 md:pt-30"
             >
               ABOUT US
               <div className="absolute -inset-2 bg-gradient-to-r from-white/20 via-gray-300/20 to-white/20 blur-xl rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

@@ -97,7 +97,7 @@ const TeamMembersSection = () => {
         </div>
 
         {/* Team Members Grid - 3 per row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {teamMembers.map((member, index) => (
             <div
               key={index}
@@ -119,22 +119,19 @@ const TeamMembersSection = () => {
                       {member.name}
                     </h3>
                     <p className="text-lg text-gray-300 italic opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                      {member.role} {member.company}
+                      {member.role}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Member Info Below Image */}
-              <div className="text-center space-y-2">
+              <div className="text-center space-y-1">
                 <h3 className="text-xl md:text-2xl font-light tracking-wide text-white">
                   {member.name}
                 </h3>
                 <p className="text-base md:text-lg text-gray-400 font-light">
                   {member.role}
-                </p>
-                <p className="text-sm md:text-base text-gray-500 italic font-light">
-                  {member.company}
                 </p>
               </div>
             </div>
