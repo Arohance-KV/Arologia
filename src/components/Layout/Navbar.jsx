@@ -1,26 +1,12 @@
-import React, { useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MenuOverlay from "./MenuOverlay";
-import { useNavbarAnimations } from "../../hooks/navbarAnimation";
 
 const Navbar = () => {
   const [isPlusMenuOpen, setIsPlusMenuOpen] = useState(false);
-  const [showPlusButton, setShowPlusButton] = useState(false);
-  const location = useLocation();
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
   const navigate = useNavigate();
-
-  const navbarRef = useRef(null);
-  const plusButtonRef = useRef(null);
-
-  // Use animation hook
-  useNavbarAnimations({
-    navbarRef,
-    plusButtonRef,
-    showPlusButton,
-    setShowPlusButton,
-    location: location.pathname,
-  });
 
   const handleContactNavigation = () => {
     navigate("/ContactUs");
@@ -34,20 +20,34 @@ const Navbar = () => {
     setIsPlusMenuOpen(false);
   };
 
+  // Handle scroll event to show/hide floating plus button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowFloatingButton(true);
+      } else {
+        setShowFloatingButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ✅ Active Link Class
+  const navLinkClass = ({ isActive }) =>
+    `hover:text-white transition-colors duration-200 ${
+      isActive ? "text-[#00FFD1] font-semibold" : "text-white/90"
+    }`;
+
   return (
     <>
       {/* Enhanced Navbar - Separate container */}
       <div className="absolute top-0 left-0 right-0 z-[100]">
-        <nav
-          ref={navbarRef}
-          className="px-4 sm:px-6 lg:px-12 py-3 sm:py-4 lg:py-6"
-        >
+        <nav className="px-4 sm:px-6 lg:px-12 py-3 sm:py-4 lg:py-6">
           <div className="flex justify-between items-center">
             {/* Logo - Left Side */}
-            <Link
-              to="/"
-              className="flex items-center space-x-2 lg:space-x-3 z-50"
-            >
+            <Link to="/" className="flex items-center space-x-2 lg:space-x-3 z-50">
               <img
                 src="/assets/logo1.webp"
                 alt="Arohance Logo"
@@ -56,25 +56,18 @@ const Navbar = () => {
             </Link>
 
             {/* Navigation Links - Center (Desktop Only) */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-sm font-medium text-white/90">
-              <Link
-                to="/about"
-                className="hover:text-white transition-colors duration-200"
-              >
+            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-sm uppercase font-medium">
+              <NavLink to="/about" className={navLinkClass}>
                 About
-              </Link>
-              <Link
-                to="/casestudies"
-                className="hover:text-white transition-colors duration-200"
-              >
+              </NavLink>
+
+              <NavLink to="/casestudies" className={navLinkClass}>
                 Case Studies
-              </Link>
-              <Link
-                to="/ContactUs"
-                className="hover:text-white transition-colors duration-200"
-              >
+              </NavLink>
+
+              <NavLink to="/ContactUs" className={navLinkClass}>
                 Contact Us
-              </Link>
+              </NavLink>
             </div>
 
             {/* Right Side */}
@@ -89,13 +82,17 @@ const Navbar = () => {
                 </button>
               </div>
 
-              {/* Plus Button - Mobile & Tablet */}
+              {/* Plus Button - Mobile & Tablet (Always visible) */}
               <div className="lg:hidden">
                 <button
                   onClick={togglePlusMenu}
                   className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <span className="plus-icon text-lg sm:text-xl font-bold text-black transition-transform duration-300">
+                  <span
+                    className={`text-lg sm:text-xl font-bold text-black transition-transform duration-500 ${
+                      isPlusMenuOpen ? "rotate-45" : "rotate-0"
+                    }`}
+                  >
                     +
                   </span>
                 </button>
@@ -105,29 +102,24 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {/* Plus Button - Desktop (Appears on scroll) */}
-      <div
-        ref={plusButtonRef}
-        className="hidden lg:block fixed top-6 sm:top-8 right-6 sm:right-8 z-[9998] transform scale-0 opacity-0"
-        style={{ display: showPlusButton ? "block" : "none" }}
-      >
+      {/* Floating Plus Button - Desktop Only (Appears on scroll) */}
+      {showFloatingButton && (
         <button
           onClick={togglePlusMenu}
-          className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+          className="fixed top-6 right-6 z-[9998] w-14 h-14 bg-white rounded-full items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hidden lg:flex"
         >
-          <span className="plus-icon text-xl sm:text-2xl font-bold text-black transition-transform duration-300">
+          <span
+            className={`text-2xl font-bold text-black transition-transform duration-500 ${
+              isPlusMenuOpen ? "rotate-45" : "rotate-0"
+            }`}
+          >
             +
           </span>
         </button>
-      </div>
+      )}
 
       {/* Menu Overlay Component */}
-      <MenuOverlay
-        isOpen={isPlusMenuOpen}
-        onClose={closePlusMenu}
-        plusButtonRef={plusButtonRef}
-        navbarRef={navbarRef}
-      />
+      <MenuOverlay isOpen={isPlusMenuOpen} onClose={closePlusMenu} />
     </>
   );
 };
