@@ -74,7 +74,7 @@ const Footer = () => {
 
   const navItems = [
     { name: 'Home', href: '/', lineWidth: 'w-16 sm:w-32 md:w-48 lg:w-96' },
-    { name: 'Case Studies', href: '/case-studies', lineWidth: 'w-12 sm:w-24 md:w-40 lg:w-80' },
+    { name: 'Case Studies', href: '/casestudies', lineWidth: 'w-12 sm:w-24 md:w-40 lg:w-80' },
     { name: 'About', href: '/about', lineWidth: 'w-10 sm:w-20 md:w-40 lg:w-84' },
     { name: 'Contact', href: '/ContactUs', lineWidth: 'w-8 sm:w-16 md:w-36 lg:w-72' }
   ];
